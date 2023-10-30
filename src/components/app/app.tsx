@@ -12,9 +12,17 @@ import ProductPage from '../../pages/product-page/product-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../consts';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../../hooks';
+import { fetchProductsAction } from '../../store/api-actions';
 
 function App(): JSX.Element {
   const authorizationStatus = AuthorizationStatus.Auth;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProductsAction());
+  }, [dispatch]);
 
   return(
     <HelmetProvider>
