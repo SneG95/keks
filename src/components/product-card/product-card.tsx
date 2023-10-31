@@ -1,6 +1,9 @@
 import cn from 'classnames';
+import FavoriteButton from '../favorite-button/favorite-button';
+import { Link, generatePath } from 'react-router-dom';
 import { TProduct } from '../../types/product';
 import { formatProductPrice } from '../../utils';
+import { AppRoute } from '../../consts';
 
 type ProductCardProps = {
   isRandom?: boolean;
@@ -8,7 +11,7 @@ type ProductCardProps = {
 }
 
 function ProductCard({ isRandom, product }: ProductCardProps): JSX.Element {
-  const {title, price, previewImage, previewImageWebp, isNew} = product;
+  const {title, price, previewImage, previewImageWebp, isNew, id} = product;
 
   return(
     <li className={cn(
@@ -21,7 +24,7 @@ function ProductCard({ isRandom, product }: ProductCardProps): JSX.Element {
         {'card-item--big': !isRandom}
       )}
       >
-        <a className="card-item__img-link" href="#">
+        <Link className="card-item__img-link" to={generatePath(AppRoute.Product, { id: id })}>
           <div className="card-item__img-wrapper">
             <picture>
               <source type="image/webp" srcSet={previewImageWebp} />
@@ -29,18 +32,16 @@ function ProductCard({ isRandom, product }: ProductCardProps): JSX.Element {
             </picture>
           </div>
           {isNew && <span className="card-item__label">Новинка</span>}
-        </a>
-        <button className="card-item__favorites card-item__favorites--active"><span className="visually-hidden">Добавить в избранное</span>
-          <svg width="51" height="41" aria-hidden="true">
-            <use xlinkHref="#icon-like"></use>
-          </svg>
-        </button>
+        </Link>
+
+        <FavoriteButton />
+
         {!isRandom && <span className="card-item__price">{`${formatProductPrice(price)} p`}</span>}
-        <a className="card-item__link" href="#">
+        <Link className="card-item__link" to={generatePath(AppRoute.Product, { id: id })}>
           <h3 className="card-item__title">
             <span>{title}</span>
           </h3>
-        </a>
+        </Link>
       </div>
     </li>
   );

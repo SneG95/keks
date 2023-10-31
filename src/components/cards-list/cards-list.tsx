@@ -1,4 +1,5 @@
 import ProductCard from '../product-card/product-card';
+import AllProductsCard from '../all-products-card/all-products-card';
 import { useAppSelector } from '../../hooks';
 import { getProducts } from '../../store/products-process/products-process.selectors';
 import { getRandomProducts } from '../../utils';
@@ -27,21 +28,7 @@ function CardsList({ isRandom }: CardsListProps): JSX.Element {
             <ProductCard key={product.id} product={product} />)
           )
       }
-      {
-        isRandom &&
-        <li className="random-main__item">
-          <a className="random-main__link" href="#">
-            <div className="random-main__icon-wrapper">
-              <div className="random-main__icon">
-                <svg width="120" height="130" aria-hidden="true">
-                  <use xlinkHref="#icon-keks"></use>
-                </svg>
-              </div>
-            </div>
-            <h3 className="random-main__subtitle">Все кексы</h3>
-          </a>
-        </li>
-      }
+      { isRandom && <AllProductsCard /> }
     </ul>
   );
 }
