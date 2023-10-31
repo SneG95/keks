@@ -14,7 +14,7 @@ import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../consts';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks';
-import { fetchProductsAction } from '../../store/api-actions';
+import { fetchProductsAction, fetchFavoritesAction } from '../../store/api-actions';
 
 function App(): JSX.Element {
   const authorizationStatus = AuthorizationStatus.Auth;
@@ -22,6 +22,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchProductsAction());
+    dispatch(fetchFavoritesAction());
   }, [dispatch]);
 
   return(

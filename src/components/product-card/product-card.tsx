@@ -34,7 +34,7 @@ function ProductCard({ isRandom, product }: ProductCardProps): JSX.Element {
           {isNew && <span className="card-item__label">Новинка</span>}
         </Link>
 
-        <FavoriteButton />
+        <FavoriteButton id={id} />
 
         {!isRandom && <span className="card-item__price">{`${formatProductPrice(price)} p`}</span>}
         <Link className="card-item__link" to={generatePath(AppRoute.Product, { id: id })}>

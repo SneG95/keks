@@ -1,6 +1,35 @@
-function FavoriteButton(): JSX.Element {
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getFavorites } from '../../store/favorite-process/favorite-process.selectors';
+import { addFavoriteAction, deleteFavoriteAction } from '../../store/api-actions';
+import cn from 'classnames';
+
+type FavoriteButtonProps = {
+  id: string;
+}
+
+function FavoriteButton({id}: FavoriteButtonProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const favorites = useAppSelector(getFavorites);
+  const isFavorite = favorites.some((product) => product.id === id);
+
+  const handleButtonClick = () => {
+    if (isFavorite) {
+      dispatch(deleteFavoriteAction(id));
+      return;
+    }
+
+    dispatch(addFavoriteAction(id));
+  };
+
   return(
-    <button className="card-item__favorites card-item__favorites--active"><span className="visually-hidden">Добавить в избранное</span>
+    <button
+      className={cn(
+        'card-item__favorites',
+        {'card-item__favorites--active': isFavorite}
+      )}
+      onClick={handleButtonClick}
+    >
+      <span className="visually-hidden">Добавить в избранное</span>
       <svg width="51" height="41" aria-hidden="true">
         <use xlinkHref="#icon-like"></use>
       </svg>
