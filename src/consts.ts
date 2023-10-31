@@ -67,3 +67,5 @@ export enum RequestStatus {
   Success = 'SUCCESS',
   Error = 'ERROR'
 }
+
+export const MAX_RANDOM_COUNT = 3;
