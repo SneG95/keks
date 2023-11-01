@@ -2,7 +2,7 @@ import Header from '../../components/header/header';
 import Hero from '../../components/hero/hero';
 import RandomMain from '../../components/random-main/random-main';
 import LastReview from '../../components/last-review/last-review';
-import Map from '../../components/map/map';
+import MapScreen from '../../components/map-screen/map-screen';
 import Footer from '../../components/footer/footer';
 
 function MainPage(): JSX.Element {
@@ -13,7 +13,7 @@ function MainPage(): JSX.Element {
         <Hero />
         <RandomMain />
         <LastReview />
-        <Map />
+        <MapScreen />
       </main>
       <Footer />
     </div>

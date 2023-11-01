@@ -1,3 +1,5 @@
+import { TShop } from './types/shop';
+
 export enum AppRoute {
   Main = '/',
   Catalog = '/catalog',
@@ -69,3 +71,25 @@ export enum RequestStatus {
 }
 
 export const MAX_RANDOM_COUNT = 3;
+
+export const SHOPS: TShop[] = [
+  {
+    name: 'Кондитерская 1',
+    address: [59.970969, 30.316252],
+    place: 'ул. Профессора Попова, 9-15',
+  },
+  {
+    name: 'Кондитерская 2',
+    address: [59.967947, 30.274708],
+    place: 'Спортивная площадка, д. 10, литер А, пом. 428, Вязовая ул.',
+  },
+  {
+    name: 'Производство',
+    address: [59.960380, 30.308725],
+    place: 'ул. Ленина, 10-8',
+  }
+];
+
+export const URL_SHOP_MARKER = 'img/content/map-marker2.svg';
+export const URL_PRODUCTION_MARKER = 'img/content/map-marker1.svg';
+export const DEFAULT_ZOOM = 14;
