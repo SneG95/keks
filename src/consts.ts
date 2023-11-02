@@ -93,3 +93,6 @@ export const SHOPS: TShop[] = [
 export const URL_SHOP_MARKER = 'img/content/map-marker2.svg';
 export const URL_PRODUCTION_MARKER = 'img/content/map-marker1.svg';
 export const DEFAULT_ZOOM = 14;
+export const DATE_COMMENT_FORMAT = 'D.MM';
+export const DATE_COMMENT_META_FORMAT = 'YYYY-MM-DD';
+export const STARS_COUNT = 5;

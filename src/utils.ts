@@ -1,4 +1,7 @@
 import { TProduct } from './types/product';
+import { TComment } from './types/comment';
+import { DATE_COMMENT_FORMAT, DATE_COMMENT_META_FORMAT } from './consts';
+import dayjs from 'dayjs';
 
 export const getRandomProducts = (array: TProduct[], count: number) => {
   const products = [...array];
@@ -12,3 +15,6 @@ export const getRandomProducts = (array: TProduct[], count: number) => {
 };
 
 export const formatProductPrice = (price: number) => price.toLocaleString();
+
+export const formatCommentDate = (commentDate: TComment['isoDate']) => commentDate ? dayjs(commentDate).format(DATE_COMMENT_FORMAT) : '';
+export const formatCommentMetaDate = (commentDate: TComment['isoDate']) => commentDate ? dayjs(commentDate).format(DATE_COMMENT_META_FORMAT) : '';

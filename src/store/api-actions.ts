@@ -88,7 +88,7 @@ export const fetchLastCommentAction = createAsyncThunk<TComment, undefined, {
   state: TState;
   extra: AxiosInstance;
 }>(
-  `${NameSpace.Comments}/fetch`,
+  `${NameSpace.Comments}/fetchLast`,
   async(_arg, {extra: api}) => {
     const {data} = await api.get<TComment>(APIRoute.LastReview);
 

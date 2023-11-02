@@ -6,7 +6,8 @@ import { TCommentsProcess } from '../../types/state';
 const initialState: TCommentsProcess = {
   comments: [],
   lastComment: null,
-  sendingCommentStatus: RequestStatus.Unsent
+  sendingCommentStatus: RequestStatus.Unsent,
+  hasErrorLastComment: false
 };
 
 export const commentsProcess = createSlice({
@@ -24,6 +25,10 @@ export const commentsProcess = createSlice({
       })
       .addCase(fetchLastCommentAction.fulfilled, (state, action) => {
         state.lastComment = action.payload;
+        state.hasErrorLastComment = false;
+      })
+      .addCase(fetchLastCommentAction.rejected, (state) => {
+        state.hasErrorLastComment = true;
       })
       .addCase(postCommentAction.pending, (state) => {
         state.sendingCommentStatus = RequestStatus.Pending;

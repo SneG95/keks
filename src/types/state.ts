@@ -19,6 +19,7 @@ export type TCommentsProcess = {
   comments: TComment[];
   lastComment: TComment | null;
   sendingCommentStatus: RequestStatus;
+  hasErrorLastComment: boolean;
 }
 
 export type TState = ReturnType<typeof store.getState>;
