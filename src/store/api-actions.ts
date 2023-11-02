@@ -3,6 +3,7 @@ import { AxiosInstance } from 'axios';
 import { TProduct, TProductDetail } from '../types/product';
 import { NameSpace, APIRoute } from '../consts';
 import { TState, TAppDispatch } from '../types/state';
+import { TComment, TCommentData } from '../types/comment';
 
 export const fetchProductsAction = createAsyncThunk<TProduct[], undefined, {
   dispatch: TAppDispatch;
@@ -51,6 +52,45 @@ export const deleteFavoriteAction = createAsyncThunk<TProductDetail, TProductDet
   `${NameSpace.Favorites}/delete`,
   async (id, {extra: api}) => {
     const {data} = await api.delete<TProductDetail>(`${APIRoute.Favorites}/${id}`);
+
+    return data;
+  }
+);
+
+export const fetchCommentsAction = createAsyncThunk<TComment[], TProductDetail['id'], {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Comments}/fetch`,
+  async (productId, {extra: api}) => {
+    const {data} = await api.get<TComment[]>(`${APIRoute.Comments}/${productId}`);
+
+    return data;
+  }
+);
+
+export const postCommentAction = createAsyncThunk<TComment, {commentData: TCommentData; productId: TProductDetail['id']}, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Comments}/add`,
+  async ({commentData, productId}, {extra: api}) => {
+    const {data} = await api.post<TComment>(`${APIRoute.Comments}/${productId}`, commentData);
+
+    return data;
+  }
+);
+
+export const fetchLastCommentAction = createAsyncThunk<TComment, undefined, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Comments}/fetch`,
+  async(_arg, {extra: api}) => {
+    const {data} = await api.get<TComment>(APIRoute.LastReview);
 
     return data;
   }

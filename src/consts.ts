@@ -41,7 +41,7 @@ export enum NameSpace {
   Products = 'PRODUCTS',
   Product = 'PRODUCT',
   User = 'USER',
-  Review = 'REVIEW',
+  Comments = 'COMMENTS',
   Filters = 'FILTERS',
   Favorites = 'FAVORITES',
   App = 'APP'
@@ -56,7 +56,7 @@ export enum APIRoute {
   Logout = 'users/logout',
   Avatar = '/users/upload',
   LastReview = 'reviews/getLast',
-  Review = '/reviews/'
+  Comments = '/reviews/'
 }
 
 export const BACKEND_URL = 'https://grading.design.pages.academy/v0/keks';
