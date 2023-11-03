@@ -1,18 +1,15 @@
 import ProductCard from '../product-card/product-card';
 import AllProductsCard from '../all-products-card/all-products-card';
-import { useAppSelector } from '../../hooks';
-import { getProducts } from '../../store/products-process/products-process.selectors';
-import { getRandomProducts } from '../../utils';
-import { MAX_RANDOM_COUNT } from '../../consts';
+import { TProduct } from '../../types/product';
 import cn from 'classnames';
 
 type CardsListProps = {
+  products: TProduct[];
+  productsCount: number;
   isRandom?: boolean;
 }
 
-function CardsList({ isRandom }: CardsListProps): JSX.Element {
-  const products = useAppSelector(getProducts);
-
+function CardsList({ products, productsCount, isRandom }: CardsListProps): JSX.Element {
   return (
     <ul className={cn(
       { 'random-main__list': isRandom },
@@ -20,13 +17,8 @@ function CardsList({ isRandom }: CardsListProps): JSX.Element {
     )}
     >
       {
-        isRandom ? getRandomProducts(products, MAX_RANDOM_COUNT).map((product) => (
-          <ProductCard key={product.id} product={product} />)
-        )
-          :
-          products.map((product) => (
-            <ProductCard key={product.id} product={product} />)
-          )
+        products.slice(0, productsCount).map((product) => (
+          <ProductCard key={product.id} product={product} />))
       }
       { isRandom && <AllProductsCard /> }
     </ul>

@@ -96,3 +96,4 @@ export const DEFAULT_ZOOM = 14;
 export const DATE_COMMENT_FORMAT = 'D.MM';
 export const DATE_COMMENT_META_FORMAT = 'YYYY-MM-DD';
 export const STARS_COUNT = 5;
+export const DEFAULT_PRODUCTS_COUNT = 6;
