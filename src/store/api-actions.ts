@@ -4,6 +4,7 @@ import { TProduct, TProductDetail } from '../types/product';
 import { NameSpace, APIRoute } from '../consts';
 import { TState, TAppDispatch } from '../types/state';
 import { TComment, TCommentData } from '../types/comment';
+import { TCategory } from '../types/category';
 
 export const fetchProductsAction = createAsyncThunk<TProduct[], undefined, {
   dispatch: TAppDispatch;
@@ -91,6 +92,19 @@ export const fetchLastCommentAction = createAsyncThunk<TComment, undefined, {
   `${NameSpace.Comments}/fetchLast`,
   async(_arg, {extra: api}) => {
     const {data} = await api.get<TComment>(APIRoute.LastReview);
+
+    return data;
+  }
+);
+
+export const fetchCategoriesAction = createAsyncThunk<TCategory[], undefined, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Filters}/fetch`,
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<TCategory[]>(APIRoute.Categories);
 
     return data;
   }

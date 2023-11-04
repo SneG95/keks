@@ -23,6 +23,13 @@ export enum CategoryProduct {
   Dessert = 'dessert'
 }
 
+export enum CategoryProductRu {
+  Bisque = 'Бисквит',
+  Cheesecake = 'Чизкейк',
+  Shortbread = 'Песочное',
+  Dessert = 'Десерт',
+}
+
 export enum TypeProduct {
   Chocolate = 'chocolate',
   Vanilla = 'vanilla',
@@ -35,6 +42,20 @@ export enum TypeProduct {
   BasketCake = 'basket-cake',
   ChocolateMuffin = 'chocolate-muffin',
   BrandMuffin = 'brand-muffin'
+}
+
+export enum TypeProductRu {
+  Chocolate = 'Шоколадный',
+  Vanilla = 'Ваниль',
+  Vegetarian = 'Вегетарианский',
+  HoneyCake = 'Медовый',
+  Lemon = 'Лимонный',
+  NewYork = 'Нью-Йорк',
+  Tart = 'Тарт',
+  FunnelCake = 'Mуравейник',
+  BasketCake = 'Корзинка',
+  ChocolateMuffin = 'Шоколадный маффин',
+  BrandMuffin = 'Фирменный маффин'
 }
 
 export enum NameSpace {
@@ -56,7 +77,8 @@ export enum APIRoute {
   Logout = 'users/logout',
   Avatar = '/users/upload',
   LastReview = 'reviews/getLast',
-  Comments = '/reviews/'
+  Comments = '/reviews/',
+  Categories = '/categories'
 }
 
 export const BACKEND_URL = 'https://grading.design.pages.academy/v0/keks';

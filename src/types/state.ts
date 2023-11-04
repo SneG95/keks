@@ -1,7 +1,8 @@
 import { TProduct, TProductDetail } from './product';
 import { store } from '../store';
 import { TComment } from './comment';
-import { RequestStatus } from '../consts';
+import { RequestStatus, CategoryProduct, TypeProduct } from '../consts';
+import { TCategory } from './category';
 
 export type TProductsProcess = {
   products: TProduct[];
@@ -20,6 +21,12 @@ export type TCommentsProcess = {
   lastComment: TComment | null;
   sendingCommentStatus: RequestStatus;
   hasErrorLastComment: boolean;
+}
+
+export type TFiltersProcess = {
+  categories: TCategory[];
+  firstLevelFilter: CategoryProduct | null;
+  secondLevelFilters: TypeProduct[];
 }
 
 export type TState = ReturnType<typeof store.getState>;
