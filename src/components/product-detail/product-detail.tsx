@@ -1,12 +1,22 @@
-function ProductDetail(): JSX.Element {
+import { TProductDetail } from '../../types/product';
+import { formatProductPrice } from '../../utils';
+import RatingList from '../rating-list/rating-list';
+
+type ProductDetailProps = {
+  product: TProductDetail;
+}
+
+function ProductDetail({product}: ProductDetailProps): JSX.Element {
+  const {title, price, weight, rating} = product;
+
   return (
     <section className="item-details item-details--form-open">
       <div className="container">
         <div className="item-details__wrapper">
           <div className="item-details__top-wrapper">
-            <h2 className="item-details__name">Чизкейк Лимонный</h2><span className="item-details__price">4 100 р</span>
+            <h2 className="item-details__name">{title}</h2><span className="item-details__price">{`${formatProductPrice(price)} р`}</span>
           </div>
-          <div className="item-details__weight-wrapper"><span className="item-details__weight">1 300 грамм</span></div>
+          <div className="item-details__weight-wrapper"><span className="item-details__weight">{`${formatProductPrice(weight)} грамм`}</span></div>
           <div className="item-details__bottom-wrapper">
             <div className="item-details__image-wrapper">
               <picture>
@@ -15,23 +25,7 @@ function ProductDetail(): JSX.Element {
               </picture><span className="item-details__label">Новинка</span>
             </div>
             <div className="item-details__review-wrapper">
-              <div className="star-rating star-rating--big">
-                <svg className="star-rating__star star-rating__star--active" width="30" height="30" aria-hidden="true">
-                  <use xlinkHref="#icon-star"></use>
-                </svg>
-                <svg className="star-rating__star star-rating__star--active" width="30" height="30" aria-hidden="true">
-                  <use xlinkHref="#icon-star"></use>
-                </svg>
-                <svg className="star-rating__star star-rating__star--active" width="30" height="30" aria-hidden="true">
-                  <use xlinkHref="#icon-star"></use>
-                </svg>
-                <svg className="star-rating__star star-rating__star--active" width="30" height="30" aria-hidden="true">
-                  <use xlinkHref="#icon-star"></use>
-                </svg>
-                <svg className="star-rating__star star-rating__star--active" width="30" height="30" aria-hidden="true">
-                  <use xlinkHref="#icon-star"></use>
-                </svg><span className="star-rating__count">26</span>
-              </div>
+              <RatingList rating={rating} isProductDetail/>
               <div className="item-details__text-wrapper"><span className="item-details__text">Цитрусовый десерт с тонким сливочным вкусом, лёгкой свежестью и низким содержанием калорий сд</span>
                 <button className="item-details__more"><span className="visually-hidden">Читать полностью</span>
                   <svg width="27" height="17" aria-hidden="true">

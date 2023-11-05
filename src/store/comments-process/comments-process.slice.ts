@@ -7,6 +7,7 @@ const initialState: TCommentsProcess = {
   comments: [],
   lastComment: null,
   sendingCommentStatus: RequestStatus.Unsent,
+  isCommentsLoaded: false,
   hasErrorLastComment: false
 };
 
@@ -22,6 +23,10 @@ export const commentsProcess = createSlice({
     builder
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
         state.comments = action.payload;
+        state.isCommentsLoaded = true;
+      })
+      .addCase(fetchCommentsAction.rejected, (state) => {
+        state.isCommentsLoaded = false;
       })
       .addCase(fetchLastCommentAction.fulfilled, (state, action) => {
         state.lastComment = action.payload;

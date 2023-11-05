@@ -20,6 +20,7 @@ export type TCommentsProcess = {
   comments: TComment[];
   lastComment: TComment | null;
   sendingCommentStatus: RequestStatus;
+  isCommentsLoaded: boolean;
   hasErrorLastComment: boolean;
 }
 
@@ -35,6 +36,12 @@ export type TUserProcess = {
   avatar: string;
   hasError: boolean;
   isExist: boolean;
+}
+
+export type TProductProcess = {
+  product: TProductDetail | null;
+  isProductLoaded: boolean;
+  hasError: boolean;
 }
 
 export type TState = ReturnType<typeof store.getState>;

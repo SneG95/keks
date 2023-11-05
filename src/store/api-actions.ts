@@ -23,6 +23,19 @@ export const fetchProductsAction = createAsyncThunk<TProduct[], undefined, {
   }
 );
 
+export const fetchProductAction = createAsyncThunk<TProductDetail, TProductDetail['id'], {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.Product}/fetch`,
+  async (productId, {extra: api}) => {
+    const {data} = await api.get<TProductDetail>(APIRoute.Product.replace(':id', productId));
+
+    return data;
+  }
+);
+
 export const fetchFavoritesAction = createAsyncThunk<TProductDetail[], undefined, {
   dispatch: TAppDispatch;
   state: TState;

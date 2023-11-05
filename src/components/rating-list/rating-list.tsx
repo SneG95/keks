@@ -3,11 +3,16 @@ import { STARS_COUNT } from '../../consts';
 
 type RatingListProps = {
   rating: number;
+  isProductDetail?: boolean;
 }
 
-function RatingList({rating}: RatingListProps): JSX.Element {
+function RatingList({rating, isProductDetail}: RatingListProps): JSX.Element {
   return (
-    <div className="star-rating">
+    <div className={cn(
+      'star-rating',
+      { 'star-rating--big': isProductDetail }
+    )}
+    >
       {
         Array.from({length: STARS_COUNT}, (_, k) => (
           <svg
