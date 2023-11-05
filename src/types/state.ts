@@ -31,8 +31,10 @@ export type TFiltersProcess = {
 
 export type TUserProcess = {
   authorizationStatus: AuthorizationStatus;
+  email: string;
   avatar: string;
   hasError: boolean;
+  isExist: boolean;
 }
 
 export type TState = ReturnType<typeof store.getState>;

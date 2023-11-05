@@ -1,7 +1,17 @@
 import { TProduct } from './types/product';
 import { TComment } from './types/comment';
 import { TCategory } from './types/category';
-import { DATE_COMMENT_FORMAT, DATE_COMMENT_META_FORMAT, CategoryProductRu, CategoryProduct, TypeProduct, TypeProductRu } from './consts';
+import {
+  DATE_COMMENT_FORMAT,
+  DATE_COMMENT_META_FORMAT,
+  CategoryProductRu,
+  CategoryProduct,
+  TypeProduct,
+  TypeProductRu,
+  NAME_REGEXP,
+  EMAIL_REGEXP,
+  PASSWORD_REGEXP
+} from './consts';
 import dayjs from 'dayjs';
 
 export const getRandomProducts = (array: TProduct[], count: number) => {
@@ -62,3 +72,10 @@ export const translateTypeToRu = (type: TypeProduct) => {
 export const getProductsByCategory = (products: TProduct[], category: CategoryProduct) => products.filter((product) => product.category === category);
 
 export const getProductsByTypes = (products: TProduct[], types: TypeProduct[]) => products.filter((product) => types.includes(product.type));
+
+export const checkNameValid = (name: string) => NAME_REGEXP.test(name);
+
+export const checkEmailValid = (email: string) => EMAIL_REGEXP.test(email);
+
+export const checkPasswordValid = (password: string) => PASSWORD_REGEXP.test(password);
+

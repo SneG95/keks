@@ -1,11 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { TProduct, TProductDetail } from '../types/product';
-import { NameSpace, APIRoute } from '../consts';
+import { NameSpace, APIRoute, AppRoute } from '../consts';
 import { TState, TAppDispatch } from '../types/state';
 import { TComment, TCommentData } from '../types/comment';
 import { TCategory } from '../types/category';
 import { TUserData } from '../types/user-data';
+import { TAuthData, TRegistrationData } from '../types/auth-data';
+import { redirectToRoute } from './actions';
+import { saveToken, dropToken } from '../services/token';
 
 export const fetchProductsAction = createAsyncThunk<TProduct[], undefined, {
   dispatch: TAppDispatch;
@@ -111,15 +114,59 @@ export const fetchCategoriesAction = createAsyncThunk<TCategory[], undefined, {
   }
 );
 
-export const checkAuthAction = createAsyncThunk<TUserData['avatarUrl'], undefined, {
+export const checkAuthAction = createAsyncThunk<TUserData, undefined, {
   dispatch: TAppDispatch;
   state: TState;
   extra: AxiosInstance;
 }>(
   `${NameSpace.User}/checkAuth`,
   async (_arg, {extra: api}) => {
-    const {data: {avatarUrl}} = await api.get<TUserData>(APIRoute.Login);
+    const {data} = await api.get<TUserData>(APIRoute.Login);
 
-    return avatarUrl;
+    return data;
+  }
+);
+
+export const registrateAction = createAsyncThunk<TUserData, TRegistrationData, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.User}/registration`,
+  async ({name, email, password}, {dispatch, extra: api}) => {
+    const {data} = await api.post<TUserData>(APIRoute.Registration, {name, email, password});
+    const {token} = data;
+    saveToken(token);
+    dispatch(redirectToRoute(AppRoute.LogIn));
+
+    return data;
+  }
+);
+
+export const loginAction = createAsyncThunk<TUserData, TAuthData, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.User}/login`,
+  async ({email, password}, {dispatch, extra: api}) => {
+    const {data} = await api.post<TUserData>(APIRoute.Login, {email, password});
+    const {token} = data;
+    saveToken(token);
+    dispatch(redirectToRoute(AppRoute.Main));
+
+    return data;
+  }
+);
+
+export const logoutAction = createAsyncThunk<void, undefined, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.User}/logout`,
+  async (_arg, {extra: api}) => {
+    await api.delete(APIRoute.Logout);
+    dropToken();
   }
 );

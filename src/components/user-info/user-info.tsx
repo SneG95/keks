@@ -1,4 +1,8 @@
-function UserInfo(): JSX.Element {
+type UserInfoProps = {
+  email: string;
+}
+
+function UserInfo({email}: UserInfoProps): JSX.Element {
   return(
     <div className="header__user-info-wrap">
       <div className="header__user-info">
@@ -8,7 +12,7 @@ function UserInfo(): JSX.Element {
             <img src="img/content/user-avatar.jpg" srcSet="img/content/user-avatar@2x.jpg 2x" width="62" height="62" alt="Аватар пользователя." />
           </picture>
         </div>
-        <p className="header__user-mail">keks@academy.ru</p>
+        <p className="header__user-mail">{email}</p>
       </div>
     </div>
   );

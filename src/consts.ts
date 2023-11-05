@@ -119,3 +119,11 @@ export const DATE_COMMENT_FORMAT = 'D.MM';
 export const DATE_COMMENT_META_FORMAT = 'YYYY-MM-DD';
 export const STARS_COUNT = 5;
 export const DEFAULT_PRODUCTS_COUNT = 6;
+export const NAME_REGEXP = /\w/;
+export const EMAIL_REGEXP = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+export const PASSWORD_REGEXP = /([0-9].*[a-zA-Z])|([a-zA-Z].*[0-9])/;
+
+export enum ValidAvatarProperties {
+  Types = 'image/jpeg, image/png',
+  Size = 1000000
+}
