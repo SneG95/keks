@@ -1,7 +1,7 @@
 import { TProduct, TProductDetail } from './product';
 import { store } from '../store';
 import { TComment } from './comment';
-import { RequestStatus, CategoryProduct, TypeProduct } from '../consts';
+import { RequestStatus, CategoryProduct, TypeProduct, AuthorizationStatus } from '../consts';
 import { TCategory } from './category';
 
 export type TProductsProcess = {
@@ -27,6 +27,12 @@ export type TFiltersProcess = {
   categories: TCategory[];
   firstLevelFilter: CategoryProduct | null;
   secondLevelFilters: TypeProduct[];
+}
+
+export type TUserProcess = {
+  authorizationStatus: AuthorizationStatus;
+  avatar: string;
+  hasError: boolean;
 }
 
 export type TState = ReturnType<typeof store.getState>;

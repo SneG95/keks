@@ -5,6 +5,7 @@ import { NameSpace, APIRoute } from '../consts';
 import { TState, TAppDispatch } from '../types/state';
 import { TComment, TCommentData } from '../types/comment';
 import { TCategory } from '../types/category';
+import { TUserData } from '../types/user-data';
 
 export const fetchProductsAction = createAsyncThunk<TProduct[], undefined, {
   dispatch: TAppDispatch;
@@ -107,5 +108,18 @@ export const fetchCategoriesAction = createAsyncThunk<TCategory[], undefined, {
     const {data} = await api.get<TCategory[]>(APIRoute.Categories);
 
     return data;
+  }
+);
+
+export const checkAuthAction = createAsyncThunk<TUserData['avatarUrl'], undefined, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  `${NameSpace.User}/checkAuth`,
+  async (_arg, {extra: api}) => {
+    const {data: {avatarUrl}} = await api.get<TUserData>(APIRoute.Login);
+
+    return avatarUrl;
   }
 );

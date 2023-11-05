@@ -11,20 +11,26 @@ import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import ProductPage from '../../pages/product-page/product-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
-import { AuthorizationStatus } from '../../consts';
 import { useEffect } from 'react';
-import { useAppDispatch } from '../../hooks';
-import { fetchProductsAction, fetchFavoritesAction, fetchLastCommentAction } from '../../store/api-actions';
+import { AuthorizationStatus } from '../../consts';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
+import { fetchProductsAction, fetchFavoritesAction, fetchLastCommentAction, checkAuthAction } from '../../store/api-actions';
 
 function App(): JSX.Element {
-  const authorizationStatus = AuthorizationStatus.Auth;
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(checkAuthAction());
     dispatch(fetchProductsAction());
-    dispatch(fetchFavoritesAction());
+
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavoritesAction());
+    }
+
     dispatch(fetchLastCommentAction());
-  }, [dispatch]);
+  }, [dispatch, authorizationStatus]);
 
   return(
     <HelmetProvider>
