@@ -1,7 +1,9 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getFavorites } from '../../store/favorite-process/favorite-process.selectors';
 import { addFavoriteAction, deleteFavoriteAction } from '../../store/api-actions';
+import { dropChangeStatusError } from '../../store/favorite-process/favorite-process.slice';
 import cn from 'classnames';
+import { useEffect } from 'react';
 
 type FavoriteButtonProps = {
   id: string;
@@ -20,6 +22,10 @@ function FavoriteButton({id}: FavoriteButtonProps): JSX.Element {
 
     dispatch(addFavoriteAction(id));
   };
+
+  useEffect(() => {
+    dispatch(dropChangeStatusError());
+  }, [dispatch]);
 
   return(
     <button
