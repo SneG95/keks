@@ -1,6 +1,7 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import Catalog from '../../components/catalog/catalog';
+import BackArrow from '../../components/back-arrow/back-arrow';
 
 function CatalogPage(): JSX.Element {
   return (
@@ -10,11 +11,7 @@ function CatalogPage(): JSX.Element {
         <h1 className="visually-hidden">Каталог товаров</h1>
         <div className="back-link">
           <div className="container">
-            <a className="back-link__link" href="#">Назад
-              <svg className="back-link__icon" width="30" height="16" aria-hidden="true">
-                <use xlinkHref="#icon-arrow-left"></use>
-              </svg>
-            </a>
+            <BackArrow />
           </div>
         </div>
         <Catalog />

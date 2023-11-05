@@ -127,3 +127,9 @@ export enum ValidAvatarProperties {
   Types = 'image/jpeg, image/png',
   Size = 1000000
 }
+
+export enum ProductsDeclination {
+  One = 'кекс',
+  Two = 'кекса',
+  Five = 'кексов'
+}

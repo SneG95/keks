@@ -1,4 +1,4 @@
-import { TProduct } from './types/product';
+import { TProduct, TProductDetail } from './types/product';
 import { TComment } from './types/comment';
 import { TCategory } from './types/category';
 import {
@@ -10,7 +10,8 @@ import {
   TypeProductRu,
   NAME_REGEXP,
   EMAIL_REGEXP,
-  PASSWORD_REGEXP
+  PASSWORD_REGEXP,
+  ProductsDeclination
 } from './consts';
 import dayjs from 'dayjs';
 
@@ -78,4 +79,30 @@ export const checkNameValid = (name: string) => NAME_REGEXP.test(name);
 export const checkEmailValid = (email: string) => EMAIL_REGEXP.test(email);
 
 export const checkPasswordValid = (password: string) => PASSWORD_REGEXP.test(password);
+
+export const getSumPriceProducts = (products: TProductDetail[]) => {
+  let sum = 0;
+  if (products.length > 0) {
+    const prices: number[] = [];
+    products.map((product) => prices.push(product.price));
+    sum = prices.reduce((a, b) => a + b, 0);
+  }
+
+  return sum;
+};
+
+export const getNoun = (count: number) => {
+  count %= 100;
+  if (count >= 5 && count <= 20) {
+    return ProductsDeclination.Five;
+  }
+  count %= 10;
+  if (count === 1) {
+    return ProductsDeclination.One;
+  }
+  if (count >= 2 && count <= 4) {
+    return ProductsDeclination.Two;
+  }
+  return ProductsDeclination.Five;
+};
 
